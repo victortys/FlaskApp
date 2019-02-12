@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Hello, world!</h1>
+        <hr class="my-4">
+        <p>Click the link below to send out emails</p>
+        <a class="btn btn-primary btn-lg" href='/save_event' role="button">Create Event</a>
+        <a class="btn btn-primary btn-lg" href='/show_events' role="button">Show Events</a>
+        <a class="btn btn-primary btn-lg" href='/save_recipient' role="button">Send Mail</a>
+        <a class="btn btn-primary btn-lg" href='/show_recipients' role="button">Show Users</a>
+    </div>
+</div>
+{% endblock %}
