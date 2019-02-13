@@ -65,7 +65,7 @@ def edit_recipient(recipient_id):
         recipient.name = form.recipient_name.data
         recipient.email = form.recipient_email.data
 
-        # If there is a change in event, the previous task will be revoked
+        # If there is a change in event, the previous task will be revoked before sending a new task
         if recipient.event_id != form.event_id.data:
             revoke_task(get_task_id(recipient_id).task_id)
             send_email(form.event_id.data, form.recipient_email.data, recipient_id)

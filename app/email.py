@@ -23,8 +23,11 @@ def send_email(event_id, user_mail, recipient_id):
     date = selected_event.timestamp
     timezone = pytz.timezone("Asia/Singapore")
     eta_date = timezone.localize(date)
+
+    # Set the task id to be sendmail_<event_id>_<recipient_id>
+    task_id = "sendmail_" + str(event_id) + "_" + str(recipient_id)
     if date > datetime.now():
-        email = send_async_email.apply_async(args=[msg], eta=eta_date)
+        email = send_async_email.apply_async(args=[msg], eta=eta_date, task_id=task_id)
 
         # save the task id, event id and recipient id
         save_task = Task(email.id, event_id, recipient_id)
@@ -36,6 +39,7 @@ def send_email(event_id, user_mail, recipient_id):
 def revoke_task(task_id):
     # revoke task from celery
     celery.control.revoke(task_id)
+
 
 
 @celery.task
